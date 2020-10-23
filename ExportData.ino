@@ -10,8 +10,9 @@ void output_data() {
     data = String(data + ", "+reading_acc_z);           
     data = String(data + ", "+reading_acc);             
     data = String(data + ", "+reading_acc_filtered);
+  dara = String(data + "\n")
 
-  if(SERIAL_OUT) Serial.println(data);
+  if(SERIAL_OUT) Serial.print(data);
   if(SD_DIRECT) writeToSD(data);
 }
 
