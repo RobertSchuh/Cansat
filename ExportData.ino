@@ -11,7 +11,7 @@ void output_data() {
     data = String(data + ", "+reading_acc);             
     data = String(data + ", "+reading_acc_filtered);
   data = String(data + "\n");
-
+  //Test
   if(SERIAL_OUT) Serial.print(data);
   if(SD_DIRECT) writeToSD(data);
 }
