@@ -17,7 +17,7 @@
 #define FILTER_ACC    0.9
 #define FILTER_HEIGHT 0.9
 
-#define DROP_CRIT_ACC    8 //5
+#define DROP_CRIT_ACC    9 //5
 #define DROP_CRIT_HEIGHT 1
 #define DROP_TEST_DURATION 1000 // in ms 
 
@@ -31,7 +31,6 @@
 #define SD_DIRECT false
 #define SD_BUFFER false
 
-Serial.begin(9600);
 BMP280 bmp280;
 File file;
 
@@ -53,6 +52,7 @@ float reading_acc; bool first_reading_acc = true;
 float reading_acc_filtered;
 
 void setup() {
+  Serial.begin(9600);
   set_state(INITIALIZATION);
   initialize_BMP280(); // make sure that this one is called first as it is the one that contains the call to "wire.begin();"
   initialize_MPU6050();

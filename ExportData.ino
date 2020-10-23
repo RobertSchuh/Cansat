@@ -17,7 +17,11 @@ void output_data() {
 }
 
 void initialize_output() {
-  if(SD_DIRECT) initialize_SD();
+  if(SD_DIRECT) {
+    initialize_SD();
+    writeToSd("t,T,p,h,hf,ax,ay,az,a,af");
+  }
+  
   if(SD_BUFFER) {
     initialize_SD();
     //Add buffer logic  
