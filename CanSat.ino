@@ -18,8 +18,8 @@
 #define FILTER_HEIGHT 0.9
 
 #define DROP_CRIT_ACC    9 //5
-#define DROP_CRIT_HEIGHT 1
-#define DROP_TEST_DURATION 1000 // in ms 
+#define DROP_CRIT_HEIGHT 0.001 //1
+#define DROP_TEST_DURATION 1 //1000 // in ms 
 
 #define CHUTE_CRIT_TIME 2000   // in ms
 #define CHUTE_CRIT_HEIGHT -100 // height above ground
@@ -27,12 +27,13 @@
 #define LANDED_TEST_WINDOW 100    // Number of measurements of height to decide stability of readings
 #define LANDED_HEIGHT_VARIATION 1 // Largest difference between min and max reading in window that confirms landing
 
-#define SERIAL_OUT true //Send sensor data to serial, SD, Buffer?
-#define SD_DIRECT false
-#define SD_BUFFER false
+#define SERIAL_OUT false //Send sensor data to serial, SD, Buffer?
+#define SD_DIRECT true  
+//#define SD_BUFFER false buffer mode corrupts data for some weird reason
 
 BMP280 bmp280;
 File file;
+String buffer;
 
 enum State {INITIALIZATION, CLIMBING, FREEFALL, CHUTEFALL, LANDED, FAIL};
 State state;
@@ -96,6 +97,7 @@ void loop() {
       break;
 
     case LANDED:
+      if(SD_BUFFER) write_buffer();
       break;
 
       //case FAIL: // No need to implement as long as state change to FAIL is done using set_state(...) which is the ONLY correct way

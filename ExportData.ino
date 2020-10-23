@@ -1,29 +1,44 @@
 void output_data() {
   String data = String(millis());
   
-    data = String(data + ", "+reading_temperature);     
-    data = String(data + ", "+reading_pressure);        
-    data = String(data + ", "+reading_height);          
-    data = String(data + ", "+reading_height_filtered); 
-    data = String(data + ", "+reading_acc_x);           
-    data = String(data + ", "+reading_acc_y);           
-    data = String(data + ", "+reading_acc_z);           
-    data = String(data + ", "+reading_acc);             
-    data = String(data + ", "+reading_acc_filtered);
+  data = String(data + ", "+reading_temperature);     
+  data = String(data + ", "+reading_pressure);        
+  data = String(data + ", "+reading_height);          
+  data = String(data + ", "+reading_height_filtered); 
+  data = String(data + ", "+reading_acc_x);           
+  data = String(data + ", "+reading_acc_y);           
+  data = String(data + ", "+reading_acc_z);           
+  data = String(data + ", "+reading_acc);             
+  data = String(data + ", "+reading_acc_filtered);
   data = String(data + "\n");
-  //Test
-  if(SERIAL_OUT) Serial.print(data);
-  if(SD_DIRECT) writeToSD(data);
+  
+  if(SERIAL_OUT) Serial.print(data); //print data in serial
+  if(SD_DIRECT) writeToSD(data);    //write data to SD using one SD access per cycle
+//  if(SD_BUFFER) {                   //store data in memory until it gets too large, then write to SD
+//    buffer.concat(data);
+//    Serial.println(buffer);
+//    if(buffer.length()>10) write_buffer(); //if buffer full, empty it and try again
+//    //Serial.println(String("wrote "+String(data.length())+" to buffer"));
+//  } 
 }
+//
+//void write_buffer() {
+//  if(buffer.length()>0) { //if buffer isn't empty write buffer to card and empty it
+//    String b2 = String(buffer);
+//    writeToSD(b2);
+//    Serial.println(String("wrote "+String(b2.length())+" to card"));
+//    //Serial.println(b2);
+//    buffer = String("");  
+//  }
+//}
 
 void initialize_output() {
   if(SD_DIRECT) {
     initialize_SD();
-    writeToSd("t,T,p,h,hf,ax,ay,az,a,af");
+    writeToSD("#t,T,p,h,hf,ax,ay,az,a,af \n");
   }
-  
-  if(SD_BUFFER) {
-    initialize_SD();
-    //Add buffer logic  
-  }
+//  if(SD_BUFFER) {
+//    initialize_SD();
+//    buffer = String("");  
+//  }
 }
