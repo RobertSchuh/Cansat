@@ -97,7 +97,7 @@ void loop() {
       break;
 
     case LANDED:
-      if(SD_BUFFER) write_buffer();
+      //if(SD_BUFFER) write_buffer();
       break;
 
       //case FAIL: // No need to implement as long as state change to FAIL is done using set_state(...) which is the ONLY correct way

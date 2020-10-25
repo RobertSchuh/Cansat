@@ -1,19 +1,28 @@
 void output_data() {
-  String data = String(millis());
+//  String data = String(millis());
+//  Serial.println(data);
+//  data = String(data + ", "+reading_temperature);     
+//  Serial.println(data);
+//  data = String(data + ", "+reading_pressure);        
+//  Serial.println(data);
+//  data = String(data + ", "+reading_height);          
+//  Serial.println(data);
+//  data = String(data + ", "+reading_height_filtered); 
+//  Serial.println(data);
+//  data = String(data + ", "+reading_acc_x);           
+//  Serial.println(data);
+//  data = String(data + ", "+reading_acc_y);           
+//  Serial.println(data);
+//  data = String(data + ", "+reading_acc_z);           
+//  Serial.println(data);
+//  data = String(data + ", "+reading_acc);             
+//  Serial.println(data);
+//  data = String(data + ", "+reading_acc_filtered);
+//  Serial.println(data);
+//  data = String(data + "\n");
   
-  data = String(data + ", "+reading_temperature);     
-  data = String(data + ", "+reading_pressure);        
-  data = String(data + ", "+reading_height);          
-  data = String(data + ", "+reading_height_filtered); 
-  data = String(data + ", "+reading_acc_x);           
-  data = String(data + ", "+reading_acc_y);           
-  data = String(data + ", "+reading_acc_z);           
-  data = String(data + ", "+reading_acc);             
-  data = String(data + ", "+reading_acc_filtered);
-  data = String(data + "\n");
-  
-  if(SERIAL_OUT) Serial.print(data); //print data in serial
-  if(SD_DIRECT) writeToSD(data);    //write data to SD using one SD access per cycle
+//  if(SERIAL_OUT) Serial.print(data); //print data in serial
+  if(SD_DIRECT) writeToSD(); //data);    //write data to SD using one SD access per cycle
 //  if(SD_BUFFER) {                   //store data in memory until it gets too large, then write to SD
 //    buffer.concat(data);
 //    Serial.println(buffer);
@@ -35,10 +44,11 @@ void output_data() {
 void initialize_output() {
   if(SD_DIRECT) {
     initialize_SD();
-    writeToSD("#t,T,p,h,hf,ax,ay,az,a,af \n");
+//  writeToSD("#t,T,p,h,hf,ax,ay,az,a,af \n");
   }
 //  if(SD_BUFFER) {
 //    initialize_SD();
+//    writeToSD("#t,T,p,h,hf,ax,ay,az,a,af \n");
 //    buffer = String("");  
 //  }
 }

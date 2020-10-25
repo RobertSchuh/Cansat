@@ -11,11 +11,29 @@ void initialize_SD() {
   Serial.print("Using file name: "); Serial.println(filename);
 }
 
-void writeToSD(String data) {
+//void writeToSD(String data) {
+//  file = SD.open(filename, FILE_WRITE);
+//  if (file) {
+//    file.print(data);
+//    file.close();
+//  }
+//  else Serial.println("SD failed");
+//}
+
+void writeToSD() {
   file = SD.open(filename, FILE_WRITE);
   if (file) {
-    file.print(data);
+    file.print(String(millis())); file.print(", ");
+    file.print(String(reading_temperature)); file.print(", ");
+    file.print(String(reading_pressure)); file.print(", ");
+    file.print(String(reading_height)); file.print(", ");
+    file.print(String(reading_height_filtered)); file.print(", ");
+    file.print(String(reading_acc_x)); file.print(", ");
+    file.print(String(reading_acc_y)); file.print(", ");
+    file.print(String(reading_acc_z)); file.print(", ");
+    file.print(String(reading_acc)); file.print(", ");
+    file.print(String(reading_acc_filtered)); file.print("\n");
+
     file.close();
   }
-  else Serial.println("SD failed");
 }
